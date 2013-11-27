@@ -1,0 +1,82 @@
+# Conky settings #
+background no
+update_interval 1
+
+cpu_avg_samples 4
+net_avg_samples 2
+
+override_utf8_locale yes
+
+double_buffer yes
+no_buffers yes
+
+text_buffer_size 2048
+#imlib_cache_size 0
+
+temperature_unit fahrenheit
+
+# Window specifications #
+
+own_window yes
+own_window_type override
+own_window_transparent yes
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+
+border_inner_margin 0
+border_outer_margin 0
+
+minimum_size 200 250
+maximum_width 200
+
+alignment tr
+gap_x 35
+gap_y 55
+
+# Graphics settings #
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+
+# Text settings #
+use_xft yes
+xftfont 文泉驿等宽微米黑:size=8
+xftalpha 0.5
+
+uppercase no
+
+temperature_unit celsius
+
+
+default_color ffffff
+
+# lua load  #
+lua_load ~/.conkycolors/clock-cpu-lcl.lua
+lua_draw_hook_pre clock_rings
+
+text
+${alignr 80}${color ffffff}${font 文泉驿等宽微米黑:size=38}${time %e}${font}${voffset -26}${color ff6600}${font 文泉驿等宽微米黑:style=bold:size=26}${time %a}${font}
+${voffset -30}${color ffffff}${font 文泉驿等宽微米黑:style=bold:size=22}${time %b}${font}${voffset 10} ${font}${color ff6600}${hr}
+${voffset 10}${color ffffff}${font 文泉驿等宽微米黑:size=21:style=Bold}${time %p}${time %l:%M:%S}$color${font 文泉驿等宽微米黑:size=9:style=Bold}
+# ${voffset 140}${font 文泉驿等宽微米黑:style=bold:size=10}${alignr}当前温度${font}
+# ${font 文泉驿等宽微米黑:size=12}${color ffffff}${alignr}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ zhcc temperature temperature 30} °c${font}
+${voffset 150}
+${color ee8262}${goto 20}${voffset 35}${cpu cpu0}%
+${color ff6600}${goto 20}cpu0
+${color cd950c}${goto 45}${voffset 23}${cpu cpu1}%
+${color ff6600}${goto 45}cpu1
+
+${color 00ff00}${goto 70}${voffset 30}${downspeed eth0}${goto 125}${downspeed wlan0}
+${color ff6600}${goto 70}${upspeed eth0}${goto 125}${upspeed wlan0}
+${color ff6600}${font 文泉驿等宽微米黑:style=bold:size=8}${goto 85}网络流量
+
+${color ffffff}${font 文泉驿等宽微米黑:style=bold:size=9}运行时间: ${uptime_short} ${goto 110}进程总数: ${processes}
+${color ffffff}磁盘使用: ${fs_used_perc /}% ${goto 110}运行中: ${running_processes}
+$color2本机内存：$memperc%$alignr$mem/$memmax
+${membar 5,200}
+系统分区：$alignr${fs_used /}/${fs_size /}
+${fs_bar 5,200 /}
+
+${color ff6600}${font 文泉驿等宽微米黑:size=10}${alignr}${nodename}
+${color ff6600}${font 文泉驿等宽微米黑:size=10}${alignr}${pre_exec cat /etc/issue.net}  $machine
+${color ff6600}${font 文泉驿等宽微米黑:size=10}${alignr}Kernel: ${kernel}
